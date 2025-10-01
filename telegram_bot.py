@@ -19,18 +19,17 @@ if not raw_ids:
     raise ValueError('TELEGRAM_USER_ID пуст или не задан в файле .env')
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-API_URL = "https://maxsummer.ru/api/?format=api"
+API_URL = os.getenv("API_URL")
 DRF_TOKEN = os.getenv("DRF_TOKEN")
 TELEGRAM_USER_IDS = set(map(int, raw_ids.split(',')))
 MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
-MISTRAL_MODEL = "mistral-medium-latest"
+MISTRAL_MODEL = os.getenv("MISTRAL_MODEL")
 
 SELECT_MODE, TITLE, BODY, GENERATE_INPUT, CONFIRM_PUBLISH = range(5)
 
 logging.basicConfig(level=logging.INFO)
 
 mistral_client = Mistral(api_key=MISTRAL_API_KEY)
-
 
 
 def is_authorized(user_id: int) -> bool:
